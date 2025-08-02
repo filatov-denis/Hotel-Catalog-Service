@@ -1,10 +1,10 @@
 package com.example.hotel_catalog.model;
 
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import static com.example.hotel_catalog.constant.TableName.ADDRESS;
 
@@ -34,8 +34,14 @@ public class Address {
     @OneToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH}, fetch = FetchType.LAZY)
     private Hotel hotel;
 
-    @EqualsAndHashCode.Exclude
-    @ManyToMany
-    private Set<Amenity> amenities = new LinkedHashSet<>();
+    public String toFormattedString() {
+        return houseNumber + " " + street + ", " + city + ", " + postCode + ", " + country;
+    }
+
+//    public Address(AddressDto dto) {
+//
+//
+//        new Address(null, dto.getHouseNumber(), dto.getStreet(), dto.getCity(), dto.getCountry(), dto.getPostCode(), null);
+//    }
 
 }

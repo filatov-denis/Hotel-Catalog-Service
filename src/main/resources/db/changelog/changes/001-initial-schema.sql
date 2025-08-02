@@ -6,7 +6,7 @@ create table hotel (
     phone varchar(50) not null,
     email varchar(250) not null,
     check_in time not null,
-    check_out time,
+    check_out time
 );
 
 create index hotel_brand_idx on hotel(brand);
@@ -31,6 +31,6 @@ create table amenity (
 
 create table hotel_amenity (
     id bigint primary key,
-    hotel_id bigint not null,
-    amenity_id bigint not null
-)
+    hotel_id bigint not null references hotel(id),
+    amenity_id bigint not null references amenity(id)
+);
