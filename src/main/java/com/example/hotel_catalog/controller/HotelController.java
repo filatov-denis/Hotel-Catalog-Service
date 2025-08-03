@@ -7,6 +7,7 @@ import com.example.hotel_catalog.service.HotelService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +42,8 @@ public class HotelController {
     }
 
     @PostMapping("{id}/amenities")
-    //todo добавить описание запроса
     @Operation(summary = "Добавление удобств", description = "Добавляет список удобств к сохранённому отелю")
-    public void setNewAmenitiesToHotel(@PathVariable Long id, @RequestBody List<String> newAmenities) {
+    public void setNewAmenitiesToHotel(@PathVariable Long id, @RequestBody @NotNull(message = "Список удобств не может отсутствовать") List<String> newAmenities) {
         hotelService.setNewAmenitiesToHotel(id, newAmenities);
     }
 

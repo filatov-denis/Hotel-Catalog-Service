@@ -15,7 +15,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/property-view/histogram")
-@Tag(name = "Гистограммы", description = "Содержит операции, связанные с получением информации об отелях в виде гистонрамм")
+@Tag(name = "Гистограммы", description = "Содержит операции, связанные с получением информации об отелях в виде гистограмм")
 public class HistogramController {
 
     private final HistogramService histogramService;
@@ -23,9 +23,7 @@ public class HistogramController {
     @GetMapping("/{param}")
     @Operation(summary = "Гистограмма по одному параметру", description = "Позволяет получить гистограмму количества указанного параметра среди всех отелей")
     public Map<String, Long> getSingleParamHistogram(@PathVariable String param) {
-        Map<String, Long> map = HistogramResult.mapData(histogramService.getSingleParamHistogram(param));
-
-        return map;
+        return HistogramResult.mapData(histogramService.getSingleParamHistogram(param));
     }
 
 }
