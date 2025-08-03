@@ -1,6 +1,7 @@
 package com.example.hotel_catalog.repository;
 
 import com.example.hotel_catalog.filter.HotelParameterizedFilter;
+import com.example.hotel_catalog.model.Amenity;
 import com.example.hotel_catalog.model.Hotel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.*;
@@ -68,11 +69,8 @@ public class AddressDynamicQuerySelector {
         }
 
         if(Objects.nonNull(filter.getAmenities())) {
-            //todo для ManyToMany
-            //root.join(AMENITIES.getValue(), JoinType.LEFT);
-            predicates.add(criteriaBuilder.equal(
-                    root.get(AMENITIES).get(NAME), formLikeSentence(filter.getAmenities()))
-            );
+            Join<Hotel, Amenity> join = root.join(AMENITIES, JoinType.INNER);
+            predicates.add(criteriaBuilder.equal(join.get(NAME), filter.getAmenities()));
         }
 
         return predicates;
@@ -81,5 +79,3 @@ public class AddressDynamicQuerySelector {
     private String formLikeSentence(String data) {return "%" + data + "%";}
 
 }
-
-

@@ -21,7 +21,7 @@ import java.util.List;
 @Tag(name = "Поиск", description = "Содержит различные поисковые операции")
 public class SearchController {
 
-    public HotelSearchService searchService;
+    public final HotelSearchService searchService;
 
     @GetMapping
     @Operation(summary = "Поиск по фильтру", description = "Выводит отфильтрованный список отелей с их краткой информацией")
