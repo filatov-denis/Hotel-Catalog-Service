@@ -42,7 +42,7 @@ public class HotelController {
 
     @PostMapping("{id}/amenities")
     //todo добавить описание запроса
-    @Operation(summary = "", description = "")
+    @Operation(summary = "Добавление удобств", description = "Добавляет список удобств к сохранённому отелю")
     public void setNewAmenitiesToHotel(@PathVariable Long id, @RequestBody List<String> newAmenities) {
         hotelService.setNewAmenitiesToHotel(id, newAmenities);
     }

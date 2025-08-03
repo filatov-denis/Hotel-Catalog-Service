@@ -16,6 +16,8 @@ import static com.example.hotel_catalog.constant.ExceptionMessage.UNEXPECTED_ERR
 @ControllerAdvice
 public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
 
+
+
     @ExceptionHandler(ServiceException.class)
     ResponseEntity<Object> handleCustomConflict(ServiceException ex, WebRequest request) {
         log.error("Custom exception occured - [{}], message - [{}]", ex.getClass().getName(), ex.getMessage());

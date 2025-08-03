@@ -38,10 +38,4 @@ public class Address {
         return houseNumber + " " + street + ", " + city + ", " + postCode + ", " + country;
     }
 
-//    public Address(AddressDto dto) {
-//
-//
-//        new Address(null, dto.getHouseNumber(), dto.getStreet(), dto.getCity(), dto.getCountry(), dto.getPostCode(), null);
-//    }
-
 }
