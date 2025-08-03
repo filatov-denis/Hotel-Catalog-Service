@@ -15,8 +15,8 @@ public class HotelShortDto {
 
     private String description;
 
-    private String brand;
-
     private String address;
+
+    private String phone;
 
 }

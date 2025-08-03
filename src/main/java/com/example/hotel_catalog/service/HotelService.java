@@ -6,6 +6,7 @@ import com.example.hotel_catalog.dto.HotelShortDto;
 import com.example.hotel_catalog.exception.EmptyIdException;
 import com.example.hotel_catalog.exception.EntityNotExistsException;
 import com.example.hotel_catalog.mapper.HotelMapper;
+import com.example.hotel_catalog.model.Address;
 import com.example.hotel_catalog.model.Amenity;
 import com.example.hotel_catalog.model.Hotel;
 import com.example.hotel_catalog.repository.AmenityRepository;
@@ -26,10 +27,17 @@ public class HotelService {
 
     private final HotelMapper hotelMapper = HotelMapper.INSTANCE;
 
+    @Transactional
     public HotelShortDto createHotel(HotelCreateDto createDto) {
         Hotel entity = hotelMapper.toEntity(createDto);
+        Address address = entity.getAddress();
+        entity.setAddress(null);
 
-        return hotelMapper.toShortDto(hotelRepository.save(entity));
+        Hotel persisted = hotelRepository.save(entity);
+        persisted.setAddress(address);
+        address.setHotel(persisted);
+
+        return hotelMapper.toShortDto(hotelRepository.save(persisted));
     }
 
     public HotelFullDto getById(Long id) {
@@ -39,28 +47,33 @@ public class HotelService {
     @Transactional
     public void setNewAmenitiesToHotel(Long id, List<String> newAmenities) {
         Hotel hotel = getHotel(id);
-        List<Amenity> allStored = amenityRepository.findAll();
-        List<Amenity> hotelStored = hotel.getAmenities().stream().toList();
+        List<Amenity> hotelStoredList = hotel.getAmenities().stream().toList();
 
-        List<String> notContained = new ArrayList<>();
+        Set<String> newAmenititesSet = new HashSet<>(newAmenities);
+
+        Map<String, Amenity> allStored = new HashMap<>();
+        for(Amenity amenity : amenityRepository.findAll()) {
+            allStored.put(amenity.getName(), amenity);
+        }
+
+        List<Amenity> removed = new ArrayList<>();
+        for(Amenity amenity : hotelStoredList) {
+            if(!newAmenititesSet.contains(amenity.getName())) {
+                hotel.removeAmenity(amenity);
+                removed.add(amenity);
+            }
+        }
+
         for(String name : newAmenities) {
-            for(Amenity amenity : hotelStored) {
-                if(amenity.getName().equals(name)) break;
+            if(allStored.containsKey(name)) {
+                Amenity amenity = allStored.get(name);
+                hotel.addAmenity(amenity);
+            } else {
+                hotel.addAmenity(new Amenity(null, name, new LinkedHashSet<>()));
             }
-
-            notContained.add(name);
         }
 
-        for(String name : notContained) {
-            for(Amenity amenity : allStored) {
-                if(amenity.getName().equals(name)) hotel.addAmenity(amenity);
-
-                break;
-            }
-
-            hotel.addAmenity(new Amenity(null, name, new LinkedHashSet<>()));
-        }
-
+        amenityRepository.saveAll(removed);
         hotelRepository.save(hotel);
     }
 

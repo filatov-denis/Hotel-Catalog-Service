@@ -1,5 +1,6 @@
 package com.example.hotel_catalog.service;
 
+import com.example.hotel_catalog.dto.HistogramResult;
 import com.example.hotel_catalog.exception.UnsupportedHistogramTypeException;
 import com.example.hotel_catalog.repository.AddressRepository;
 import com.example.hotel_catalog.repository.AmenityRepository;
@@ -7,7 +8,7 @@ import com.example.hotel_catalog.repository.HotelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.List;
 
 import static com.example.hotel_catalog.constant.FieldName.*;
 
@@ -21,9 +22,9 @@ public class HistogramService {
 
     private final AddressRepository addressRepository;
 
-    public Map<String, Integer> getSingleParamHistogram(String paramName) {
+    public List<HistogramResult> getSingleParamHistogram(String paramName) {
         return switch(paramName) {
-            case NAME -> hotelRepository.getBrandHistogram();
+            case BRAND -> hotelRepository.getBrandHistogram();
             case CITY, COUNTRY -> addressRepository.getDataHistogram(paramName);
             case AMENITIES -> amenityRepository.getAmenityHistogram();
             default -> throw new UnsupportedHistogramTypeException();

@@ -5,7 +5,7 @@ spring:
   application:
     name: Hotel-Catalog-Service
   datasource:
-    url: jdbc:h2:mem:customerDB
+    url: jdbc:h2:mem:hotelDB
     driver-class-name: org.h2.Driver
     username: temporary_user
     password: temporary_password
@@ -13,9 +13,6 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: none
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.H2Dialect
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yml
 logging:

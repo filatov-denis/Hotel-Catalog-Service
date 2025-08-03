@@ -58,4 +58,9 @@ public class Hotel {
         amenity.getHotels().add(this);
     }
 
+    public void removeAmenity(Amenity amenity) {
+        amenities.remove(amenity);
+        amenity.getHotels().remove(this);
+    }
+
 }

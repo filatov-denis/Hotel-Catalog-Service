@@ -18,7 +18,7 @@ create table address (
     city varchar(250) not null,
     country varchar(250) not null,
     post_code varchar(250) not null,
-    hotel_id bigint references hotel(id) not null
+    hotel_id bigint references hotel(id)
 );
 
 create index address_city_idx on address(city);
@@ -30,7 +30,7 @@ create table amenity (
 );
 
 create table hotel_amenity (
-    id bigint primary key,
+    id bigserial primary key,
     hotel_id bigint not null references hotel(id),
     amenity_id bigint not null references amenity(id)
 );
