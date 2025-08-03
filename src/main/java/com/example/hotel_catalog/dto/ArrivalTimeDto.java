@@ -18,7 +18,7 @@ public class ArrivalTimeDto {
 
     @JsonFormat(pattern = "HH:mm")
     @NotNull(message = "Время начала прибытия не может быть пустым")
-    @Schema(description = "Дата рождения", example = "12:00")
+    @Schema(description = "Время начала прибытия", example = "12:00")
     private LocalTime checkIn;
 
     @JsonFormat(pattern = "HH:mm")

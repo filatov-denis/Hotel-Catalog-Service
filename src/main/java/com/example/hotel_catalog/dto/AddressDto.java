@@ -20,23 +20,23 @@ public class AddressDto {
     private Short houseNumber;
 
     @NotNull(message = "Наименование улицы не может быть пустым")
-    @Size(max = 250, message = "Длина имени отеля не может превышать 250 символов")
+    @Size(max = 250, message = "Длина наименования улицы не может превышать 250 символов")
     @Schema(description = "Наименование улицы", example = "Pobediteley Avenue")
     private String street;
 
     @NotNull(message = "Наименование города не может быть пустым")
-    @Size(max = 250, message = "Длина имени отеля не может превышать 250 символов")
-    @Schema(description = "Наименование города", example = "Minsk")
+    @Size(max = 250, message = "Длина названия города не может превышать 250 символов")
+    @Schema(description = "Название города", example = "Minsk")
     private String city;
 
     @NotNull(message = "Название страны не может быть пустым")
-    @Size(max = 250, message = "Длина имени отеля не может превышать 250 символов")
+    @Size(max = 250, message = "Длина названия страны не может превышать 250 символов")
     @Schema(description = "Название страны", example = "Belarus")
     private String country;
 
     @NotNull(message = "Номер дома не может быть пустым")
     @Size(max = 50, message = "Длина почтового индекса не может превышать 50 символов")
-    @Schema(description = "Постовый индекс", example = "220009")
+    @Schema(description = "Почтовый индекс", example = "220009")
     private String postCode;
 
     private AddressDto(Address address) {
