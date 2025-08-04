@@ -1,0 +1,21 @@
+server:
+  forward-headers-strategy: native
+  port: 8092
+spring:
+  application:
+    name: Hotel-Catalog-Service
+  datasource:
+    driverClassName: #Your db driver
+    url: #Your db url
+    username: #Your db username
+    password: #Your db password
+  jpa:
+    database-platform: #Your hibernate dialect
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yml
+logging:
+  level:
+    org:
+      hibernate: warn
