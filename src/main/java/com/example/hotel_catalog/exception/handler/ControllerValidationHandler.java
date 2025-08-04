@@ -25,7 +25,7 @@ public class ControllerValidationHandler {
 
     private Map<String, List<String>> getErrorsMap(List<String> errors) {
         Map<String, List<String>> errorResponse = new HashMap<>();
-        errorResponse.put("errors", errors);
+        errorResponse.put("Возникли следующие ошибки валидации при обработке запроса:", errors);
         return errorResponse;
     }
 

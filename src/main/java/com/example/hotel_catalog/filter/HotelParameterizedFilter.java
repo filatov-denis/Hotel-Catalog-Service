@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Schema(description = "Параметры для фильтрации отелей")
@@ -26,8 +28,7 @@ public class HotelParameterizedFilter {
     @Schema(description = "Страна", example = "Germany")
     private String country;
 
-    @Size(max = 250, message = "Длина наименования удобств не может превышать 250 символов")
-    @Schema(description = "Удобства", example = "Fitness center")
-    private String amenities;
+    @Schema(description = "Удобства", example = "Fitness center, WiFi")
+    private List<String> amenities;
 
 }
