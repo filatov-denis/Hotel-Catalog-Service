@@ -24,6 +24,7 @@ public class AddressDto {
     @Schema(description = "Наименование улицы", example = "Pobediteley Avenue")
     private String street;
 
+
     @NotNull(message = "Наименование города не может быть пустым")
     @Size(max = 250, message = "Длина названия города не может превышать 250 символов")
     @Schema(description = "Название города", example = "Minsk")
