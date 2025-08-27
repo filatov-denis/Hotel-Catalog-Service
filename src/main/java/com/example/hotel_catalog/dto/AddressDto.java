@@ -24,12 +24,10 @@ public class AddressDto {
     @Schema(description = "Наименование улицы", example = "Pobediteley Avenue")
     private String street;
 
-
     @NotNull(message = "Наименование города не может быть пустым")
     @Size(max = 250, message = "Длина названия города не может превышать 250 символов")
     @Schema(description = "Название города", example = "Minsk")
     private String city;
-
 
     @NotNull(message = "Название страны не может быть пустым")
     @Size(max = 250, message = "Длина названия страны не может превышать 250 символов")
@@ -41,7 +39,6 @@ public class AddressDto {
     @Schema(description = "Почтовый индекс", example = "220009")
     private String postCode;
 
-
     private AddressDto(Address address) {
         this.city = address.getCity();
         this.country = address.getCountry();
@@ -49,8 +46,5 @@ public class AddressDto {
         this.postCode = address.getPostCode();
         this.street = address.getStreet();
     }
-
-//
-
 
 }
