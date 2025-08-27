@@ -39,6 +39,7 @@ public class AddressDto {
     @Schema(description = "Почтовый индекс", example = "220009")
     private String postCode;
 
+
     private AddressDto(Address address) {
         this.city = address.getCity();
         this.country = address.getCountry();
