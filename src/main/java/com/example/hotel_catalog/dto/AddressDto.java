@@ -29,7 +29,7 @@ public class AddressDto {
     @Schema(description = "Название города", example = "Minsk")
     private String city;
 
-    
+
     @NotNull(message = "Название страны не может быть пустым")
     @Size(max = 250, message = "Длина названия страны не может превышать 250 символов")
     @Schema(description = "Название страны", example = "Belarus")
