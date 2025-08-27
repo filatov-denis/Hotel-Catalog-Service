@@ -46,5 +46,4 @@ public class AddressDto {
         this.postCode = address.getPostCode();
         this.street = address.getStreet();
     }
-
 }
